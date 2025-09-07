@@ -97,6 +97,7 @@ echo "🐚 Configuring shell settings..."
 gsettings set org.gnome.shell development-tools true
 gsettings set org.gnome.shell disable-user-extensions false
 gsettings set org.gnome.shell disabled-extensions "['ding@rastersoft.com']"
+gsettings set org.gnome.shell enabled-extensions "['hidetopbar@mathieu.bidon.ca', 'forge@jmmaranan.com', 'auto-move-windows@gnome-shell-extensions.gcampax.github.com', 'Vitals@CoreCoding.com', 'weatherornot@somepaulo.github.io', 'blur-my-shell@aunetx', 'gsconnect@andyholmes.github.io', 'extension-list@tu.berry', 'static-workspace-background@CleoMenezesJr.github.io', 'clipboard-history@alexsaveau.dev', 'steal-my-focus-window@steal-my-focus-window', 'default-workspace@mateusrodcosta.com', 'user-theme@gnome-shell-extensions.gcampax.github.com', 'currentworkspacename@jaybeeunix.dev', 'just-perfection-desktop@just-perfection']"
 gsettings set org.gnome.shell.app-switcher current-workspace-only true
 
 # Set favorite apps
