@@ -69,7 +69,6 @@ declare -A extensions=(
     ["https://extensions.gnome.org/extension/8233/current-workspace-name/"]="Current Workspace Name"
     ["https://extensions.gnome.org/extension/4783/default-workspace/"]="Default Workspace"
     ["https://extensions.gnome.org/extension/3088/extension-list/"]="Extension List"
-    ["https://extensions.gnome.org/extension/4481/forge/"]="Forge"
     ["https://extensions.gnome.org/extension/1319/gsconnect/"]="GSConnect"
     ["https://extensions.gnome.org/extension/545/hide-top-bar/"]="Hide Top Bar"
     ["https://extensions.gnome.org/extension/3843/just-perfection/"]="Just Perfection"
