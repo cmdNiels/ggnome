@@ -112,4 +112,17 @@ gsettings set org.gnome.shell favorite-apps "['org.gnome.Settings.desktop', 'org
 echo "📱 Setting up app folders..."
 gsettings set org.gnome.desktop.app-folders folder-children "['Utilities', 'System', 'Games']"
 
+# Locale settings
+echo "🌍 Configuring locale settings..."
+read -p "Set locale to use Celsius? [y/N]: " -n 1 -r locale_choice
+echo ""
+if [[ $locale_choice =~ ^[Yy]$ ]]; then
+    echo "🌍 Setting locale to metric measurements..."
+    sudo localectl set-locale LC_MEASUREMENT=en_GB.UTF-8
+    echo "✅ Locale measurement set to metric format"
+else
+    echo "⏭️  Skipping locale measurement configuration"
+fi
+
+echo ""
 echo "✅ GNOME settings configuration complete!"
