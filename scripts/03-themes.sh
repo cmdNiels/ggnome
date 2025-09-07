@@ -31,11 +31,84 @@ else
     echo "✅ Yaru themes already available"
 fi
 
-# Check for SF Pro font
+# Install SF Pro font
 if ! fc-list | grep -q "SF Pro"; then
-    echo "⚠️  SF Pro font not found"
-    echo "    You can manually install SF Pro font from Apple or use a similar font"
-    echo "    The system will fall back to the default font for now"
+    echo "📥 Installing SF Pro font..."
+    
+    # Create fonts directory if it doesn't exist
+    mkdir -p ~/.local/share/fonts
+    
+    # Download SF Pro font
+    echo "  Downloading SF Pro font..."
+    if curl -L "https://github.com/sahibjotsaggu/San-Francisco-Pro-Fonts/raw/refs/heads/master/SF-Pro.ttf" -o ~/.local/share/fonts/SF-Pro.ttf; then
+        # Refresh font cache
+        fc-cache -f -v ~/.local/share/fonts > /dev/null 2>&1
+        echo "✅ SF Pro font installed successfully"
+    else
+        echo "⚠️  Failed to download SF Pro font"
+        echo "    The system will fall back to the default font"
+    fi
+else
+    echo "✅ SF Pro font already installed"
+fi
+
+# Install Apple Emoji font
+if ! fc-list | grep -q "Apple Color Emoji"; then
+    echo "📥 Installing Apple Color Emoji font..."
+    
+    # Create fonts directory if it doesn't exist
+    mkdir -p ~/.local/share/fonts
+    
+    # Download Apple Color Emoji font
+    echo "  Downloading Apple Color Emoji font..."
+    if curl -L "https://github.com/samuelngs/apple-emoji-linux/releases/latest/download/AppleColorEmoji.ttf" -o ~/.local/share/fonts/AppleColorEmoji.ttf; then
+        
+        # Create fontconfig directory
+        mkdir -p ~/.config/fontconfig/conf.d
+        
+        # Create emoji font configuration
+        echo "  Configuring emoji font priority..."
+        cat > ~/.config/fontconfig/conf.d/01-emoji.conf << 'EOF'
+<?xml version="1.0"?>
+<!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+<fontconfig>
+<alias>
+<family>emoji</family>
+<prefer>
+<family>Apple Color Emoji</family>
+</prefer>
+</alias>
+</fontconfig>
+EOF
+        
+        # Create configuration to disable Noto Color Emoji priority
+        cat > ~/.config/fontconfig/conf.d/10-disable-noto-emoji.conf << 'EOF'
+<?xml version="1.0"?>
+<!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+<fontconfig>
+<!-- Deprioritize Noto Color Emoji -->
+<match target="font">
+<test name="family">
+<string>Noto Color Emoji</string>
+</test>
+<edit name="priority" mode="assign">
+<int>0</int>
+</edit>
+</match>
+</fontconfig>
+EOF
+        
+        # Refresh font cache
+        echo "  Refreshing font cache..."
+        fc-cache -f -v > /dev/null 2>&1
+        echo "✅ Apple Color Emoji font installed successfully"
+        echo "    Note: You may need to select a different font in GNOME Tweaks for emojis to work properly"
+    else
+        echo "⚠️  Failed to download Apple Color Emoji font"
+        echo "    Emojis will use the default system font"
+    fi
+else
+    echo "✅ Apple Color Emoji font already installed"
 fi
 
 # Check for ArcMidnight cursor theme
