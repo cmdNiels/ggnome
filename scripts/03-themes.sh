@@ -72,12 +72,12 @@ if ! fc-list | grep -q "Apple Color Emoji"; then
 <?xml version="1.0"?>
 <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
 <fontconfig>
-<alias>
-<family>emoji</family>
-<prefer>
-<family>Apple Color Emoji</family>
-</prefer>
-</alias>
+	<alias>
+		<family>emoji</family>
+		<prefer>
+			<family>Apple Color Emoji</family>
+		</prefer>
+	</alias>
 </fontconfig>
 EOF
         
@@ -86,15 +86,15 @@ EOF
 <?xml version="1.0"?>
 <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
 <fontconfig>
-<!-- Deprioritize Noto Color Emoji -->
-<match target="font">
-<test name="family">
-<string>Noto Color Emoji</string>
-</test>
-<edit name="priority" mode="assign">
-<int>0</int>
-</edit>
-</match>
+	<!-- Deprioritize Noto Color Emoji -->
+	<match target="font">
+		<test name="family">
+			<string>Noto Color Emoji</string>
+		</test>
+		<edit name="priority" mode="assign">
+			<int>0</int>
+		</edit>
+	</match>
 </fontconfig>
 EOF
         

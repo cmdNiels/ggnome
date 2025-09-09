@@ -17,6 +17,7 @@ sudo apt install -y \
     gnome-shell-extension-manager \
     chrome-gnome-shell \
     dconf-editor \
+    gnome-weather \
     flatpak \
     git \
     curl \
