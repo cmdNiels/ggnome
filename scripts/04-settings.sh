@@ -73,6 +73,7 @@ echo "💤 Configuring session settings..."
 gsettings set org.gnome.desktop.session idle-delay 0
 gsettings set org.gnome.desktop.screensaver lock-enabled false
 gsettings set org.gnome.desktop.screensaver ubuntu-lock-on-suspend true
+gsettings set org.gnome.desktop.screensaver lock-on-suspend true
 
 # Mouse settings
 echo "🖱️  Configuring mouse settings..."

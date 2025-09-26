@@ -27,7 +27,16 @@ read -p "Continue with GNOME setup? (y/N): " confirm
 [[ ! "$confirm" =~ ^[Yy]$ ]] && exit 0
 
 # Install git if needed
-command -v git >/dev/null || { sudo apt update && sudo apt install -y git; }
+if ! command -v git >/dev/null; then
+    if command -v dnf >/dev/null 2>&1; then
+        sudo dnf update -y && sudo dnf install -y git
+    elif command -v apt >/dev/null 2>&1; then
+        sudo apt update && sudo apt install -y git
+    else
+        echo "❌ Could not detect package manager to install git"
+        exit 1
+    fi
+fi
 
 # Clone repo
 echo -e "${BLUE}Cloning repository...${NC}"

@@ -16,16 +16,33 @@ fi
 
 echo "📦 Installing development tools..."
 
-# Install development packages
-sudo apt install -y \
-    build-essential \
-    python3-pip \
-    nodejs \
-    npm \
-    docker.io \
-    docker-compose \
-    android-tools-adb \
-    android-tools-fastboot
+# Detect distribution and install accordingly
+if command -v dnf >/dev/null 2>&1; then
+    # Fedora installation
+    sudo dnf groupinstall -y "Development Tools" "Development Libraries"
+    sudo dnf install -y \
+        python3-pip \
+        nodejs \
+        npm \
+        docker \
+        docker-compose \
+        android-tools \
+        android-file-transfer
+elif command -v apt >/dev/null 2>&1; then
+    # Ubuntu installation
+    sudo apt install -y \
+        build-essential \
+        python3-pip \
+        nodejs \
+        npm \
+        docker.io \
+        docker-compose \
+        android-tools-adb \
+        android-tools-fastboot
+else
+    echo "❌ Unsupported distribution for development tools installation"
+    exit 1
+fi
 
 # Add user to docker group if not already added
 if ! groups | grep -q docker; then

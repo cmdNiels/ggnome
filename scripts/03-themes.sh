@@ -25,7 +25,16 @@ fi
 # Install Yaru themes if not available
 if ! gsettings get org.gnome.desktop.interface gtk-theme | grep -q "Yaru"; then
     echo "📥 Installing Yaru themes..."
-    sudo apt install -y yaru-theme-gtk yaru-theme-icon yaru-theme-sound
+    
+    # Detect distribution and install accordingly
+    if command -v dnf >/dev/null 2>&1; then
+        sudo dnf install -y yaru-theme
+    elif command -v apt >/dev/null 2>&1; then
+        sudo apt install -y yaru-theme-gtk yaru-theme-icon yaru-theme-sound
+    else
+        echo "⚠️  Could not detect package manager, skipping Yaru theme installation"
+    fi
+    
     echo "✅ Yaru themes installed"
 else
     echo "✅ Yaru themes already available"
